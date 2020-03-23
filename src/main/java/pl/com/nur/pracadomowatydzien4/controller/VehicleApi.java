@@ -104,30 +104,19 @@ public class VehicleApi {
     @PostMapping("/modification")
     public String modElementVehicle(@ModelAttribute Car car,
                                             HttpServletResponse response){
-        System.out.println(car.getId());
-        System.out.println(car.getMark());
-        System.out.println(car.getModel());
-        System.out.println(car.getColor());
-
         Optional<Car> first = vehicleList.getVehicleList().stream()
                 .filter(vehicleList -> vehicleList.getId()==car.getId()).findFirst();
 
         if(first.isPresent()) {
             if (car.getMark() != "") {
-                System.out.println("zmieniam markę");
                 first.get().setMark(car.getMark());
             }
             if (car.getModel() != "") {
-                System.out.println("zmieniam model");
                 first.get().setModel(car.getModel());
             }
             if (car.getColor() != "") {
-                System.out.println("zmieniam kolor");
                 first.get().setColor(car.getColor());
             }
-
-            System.out.println(first);
-            System.out.println(car);
             response.setStatus(200);
             return "redirect:/vehicles";
         }
@@ -143,15 +132,13 @@ public class VehicleApi {
                                 HttpServletResponse response){
         Optional<Car> first = vehicleList.getVehicleList().stream()
                 .filter(vehicleList -> vehicleList.getId()==id).findFirst();
-        System.out.println("jestem i próbuję kasować ");
         if(first.isPresent()){
             vehicleList.getVehicleList().remove(first.get());
-           // return new ResponseEntity(first, HttpStatus.OK);
             response.setStatus(200);
             return "redirect:/vehicles";
         }
         response.setStatus(404);
-        return "redirect:/vehicles"; // new ResponseEntity(HttpStatus.METHOD_NOT_ALLOWED);
+        return "redirect:/vehicles";
     }
 
 
