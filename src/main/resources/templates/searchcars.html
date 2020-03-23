@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/pure-min.css" integrity="sha384-oAOxQR6DkCoMliIh8yFnu25d7Eq/PHS21PClpwjOTeU2jRSq11vu66rf90/cZr47" crossorigin="anonymous">
+</head>
+<body>
+<h1>Pojazdy</h1>
+<p>Hello World!</p>
+
+<div >
+    <table class="pure-table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Make</th>
+            <th>Model</th>
+            <th>Color</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="*{searchcar.getId()}"></td>
+            <td th:text="*{searchcar.getMark()}"></td>
+            <td th:text="*{searchcar.getModel()}"></td>
+            <td th:text="*{searchcar.getColor()}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <a class="pure-button pure-button-primary" th.method="post"
+           th:href="@{/vehicles/}">go back</a>
+</div>
+
+</body>
+</html>

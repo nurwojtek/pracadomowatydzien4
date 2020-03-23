@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/pure-min.css" integrity="sha384-oAOxQR6DkCoMliIh8yFnu25d7Eq/PHS21PClpwjOTeU2jRSq11vu66rf90/cZr47" crossorigin="anonymous">
+</head>
+<body>
+<h1>Pojazdy</h1>
+<p>Hello World!</p>
+
+<div >
+ <table class="pure-table">
+    <thead>
+      <tr>
+         <th>ID</th>
+         <th>Make</th>
+         <th>Model</th>
+         <th>Color</th>
+         <th>Del</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="car: ${cars}">
+         <td id=zmienna th:text="${car.getId()}  "></td>
+         <td th:text="${car.getMark()}  " ></td>
+         <td th:text="${car.getModel()}  "></td>
+         <td th:text="${car.getColor()}  "></td>
+         <td><a class="pure-button pure-button-primary" th.method="post"
+               th:href="@{/vehicles/delete/{id}(id=${car.id})}">Delete</a></td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <form class="pure-form" th:action="@{/vehicles}" th:object="${newCar}" method="post">
+         <td> <input type="text" th:field="*{id}" placeholder="id" th:background="grey"></td>
+         <td> <input type="text" th:field="*{model}" placeholder="Model" ></td>
+         <td> <input type="text" th:field="*{mark}" placeholder="Marka" ></td>
+         <td> <input type="text" th:field="*{color}" placeholder="Color"></td>
+         <td> <button class="pure-button pure-button-primary">add Car</button></td>
+        </form>
+      </tr>
+    </tfoot>
+ </table>
+</div>
+<br>
+<form class="pure-form" th:action="@{/vehicles/modification}"  th:object="${modCar}" method="post">
+    <legend>Modify the car by id</legend>
+    <p>ID: <input class="pure-input-1-5" type="text" th:field="*{id}">
+      Model: <input class="pure-input-1-5" type="text" th:field="*{model}">
+      Mark: <input class="pure-input-1-5" type="text" th:field="*{mark}">
+      Color: <input class="pure-input-1-5" type="text" th:field="*{color}">
+      <button class="pure-button pure-button-primary">mod Car</button></p>
+</form>
+
+
+<br>
+<form class="pure-form"  th:action="@{/vehicles/searchcar/}" th:object="${newCar}" method="get">
+    <legend>Find Car by id</legend>
+    <p>CarId: <input type="number" th:field="*{id}"></p>
+    <button class="pure-button pure-button-primary">Find Car by id</button></p>
+</form>
+
+</body>
+</html>
